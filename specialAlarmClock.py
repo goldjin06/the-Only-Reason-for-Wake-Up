@@ -9,7 +9,7 @@ def hour_select_options():
     
     value_ = ''
     for i in range(1, 25):
-        value_ = value_+f'<option value="{i}"></option>'
+        value_ = value_+f'<option value="{i : 01d}"></option>'
 
     return f'''
         <select title="hour">
@@ -22,19 +22,24 @@ def minute_select_options():
     
     value_ = ''
     for i in range(00, 60):
-        value_ = value_+f'<option value="{i}"></option>'
+        value_ = value_+f'<option value="{i:0>2}"></option>'
 
-    return f'''
+    print( f'''
         <select title="minute">
             {value_}
         </select>
-    '''
-#이거 마저 작석해야되
+    ''')
+
+#이거 마저 작석해야되 -> 작성완료
 def missionType(typeNum):
     if typeNum == 1:
         return '랜덤'
     elif typeNum == 2:
         return '사진 매칭'
+    elif typeNum == 3:
+        return '반응속도테스트'
+    elif typeNum == 4:
+        return '연산'
 
 #설정한 알람들을 모아둔 list, dictionary
 #id는 웹페이지 분류를 위해서
@@ -49,10 +54,11 @@ alarms = [
 def index():
     content = ''
     for alarm in alarms:
-         content = content+f'''<li>
-                    <a href="/alarm/{(alarm["id"])}/">
-                         설정 시간 - {(alarm["hour"])} : {alarm["minute"]} - 미션 : {missionType(alarm["missionType"])}
-                     </a>
+         content = content+f'''
+            <li>
+                <a href="/alarm/{(alarm["id"])}/">
+                        설정 시간 - {(alarm["hour"])} : {alarm["minute"]} - 미션 : {missionType(alarm["missionType"])}
+                </a>
             </li>
          '''
 
@@ -64,13 +70,15 @@ def index():
                 {content}
             </ol>
             <ul>
-                #알람 추가, 삭제, 수정 기능
+                알람 추가, 삭제, 수정 기능
                 <li><a href = /create/>create</a></li>
-                
             </ul>
         </body>
     </html>
     '''
 
-app.run(debug=True)
+@app.route('/create/')
+def create():
 
+
+app.run(debug=True)

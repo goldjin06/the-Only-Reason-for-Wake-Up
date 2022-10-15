@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 # import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 
@@ -105,9 +105,10 @@ nextId = 3
 # template -> 알람 목록
 # text -> 본문
 def template(content, text, id=None):
-    update_delete = ''
+    user_funcions = ''
     if id != None:
-        update_delete =f'''
+        user_funcions =f'''
+            <li><a href = /create/>create</a></li>
             <li><a href="/update/{id}/">update</a></li>
             <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete"></form></li>
         '''
@@ -121,9 +122,7 @@ def template(content, text, id=None):
             </ol>
             {text}
             <ul>
-                알람 추가, 삭제, 수정 기능
-                <li><a href = /create/>create</a></li>
-                {update_delete}
+                {user_funcions}
             </ul>
         </body>
     </html>
@@ -241,7 +240,7 @@ def update(id):
             <br>
             <a href="/">홈으로 돌아가기</a>
         '''
-    
+
 @app.route('/delete/<int:id>/', methods=['POST'])
 def delete(id):
     for alarm in alarms:
@@ -250,5 +249,6 @@ def delete(id):
             break
 
     return redirect('/')
+
 
 app.run(host='0.0.0.0',debug=True)

@@ -241,5 +241,14 @@ def update(id):
             <br>
             <a href="/">홈으로 돌아가기</a>
         '''
+    
+@app.route('/delete/<int:id>/', methods=['POST'])
+def delete(id):
+    for alarm in alarms:
+        if id == alarm['id']:
+            alarms.remove(alarm)
+            break
+
+    return redirect('/')
 
 app.run(host='0.0.0.0',debug=True)

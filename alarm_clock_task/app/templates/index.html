@@ -1,0 +1,11 @@
+
+
+{% for alarm in alarms %}
+
+<li>
+    <a href="/alarm/{{alarm['id']}}/">
+        미션 : {{ alarm["missionType"] }}
+    </a>
+</li>
+
+{% endfor %}

@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 alarms = [
         {'id': 1, 'hour': 6, 'minute': 30, 'missionType' : '랜덤'},
-        {'id': 2, 'hour': 7, 'minute': 00, 'missionType' : '사진 매칭'}
+        {'id': 2, 'hour': 16, 'minute': 38, 'missionType' : '사진 매칭'}
         ]
 nextId = 3
 
@@ -237,16 +237,34 @@ def delete(id):
     return redirect('/')
 
 
-app.run(host='0.0.0.0',debug=True)
-
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', threaded= True)
+#     time_checker()
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+def ringring_alarm():
+    print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
+    now_sec = time.strftime('%S', time.localtime(time.time()))
+    time.sleep(60 - int(now_sec))
+
 def time_checker():
     while True:
         now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
-        time.sleep(1)
+        time.sleep(3)
+        for alarm in alarms:
+            if f'{alarm["hour"]}시 {alarm["minute"]}분' == now_time:
+                ringring_alarm()
+                print(now_time)
+                print(f'{alarm["hour"]}시 {alarm["minute"]}분')
+            else:
+                pass
 
+alarm_timing = Thread(target= time_checker, args= ())
 
-
+if __name__ == '__main__':
+    alarm_timing.start()
+    app.run(host='0.0.0.0', threaded= True)
+    
 
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ

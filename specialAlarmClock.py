@@ -1,18 +1,16 @@
 from flask import Flask, request, redirect
-# import RPi as GPIO #디버깅 하려고 일단 주석처리
+from threading import Thread
+#import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
+import os
 
 app = Flask(__name__)
 
-
-
-
-
-
-
-
-
-
+alarms = [
+        {'id': 1, 'hour': 6, 'minute': 30, 'missionType' : '랜덤'},
+        {'id': 2, 'hour': 7, 'minute': 00, 'missionType' : '사진 매칭'}
+        ]
+nextId = 3
 
 
 #data
@@ -86,18 +84,6 @@ def r_missionType(mission):
     elif mission == '연산':
         return 4
 
-#설정한 알람들을 모아둔 list, dictionary
-#id는 웹페이지 분류를 위해서
-#missionType 1 == random
-alarms = [
-        {'id': 1, 'hour': 6, 'minute': 30, 'missionType' : '랜덤'},
-        {'id': 2, 'hour': 7, 'minute': 00, 'missionType' : '사진 매칭'}
-        ]
-nextId = 3
-
-
-
-
 
 
 
@@ -105,10 +91,9 @@ nextId = 3
 # template -> 알람 목록
 # text -> 본문
 def template(content, text, id=None):
-    user_funcions = ''
+    update_delete = ''
     if id != None:
-        user_funcions =f'''
-            <li><a href = /create/>create</a></li>
+        update_delete =f'''
             <li><a href="/update/{id}/">update</a></li>
             <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete"></form></li>
         '''
@@ -116,13 +101,14 @@ def template(content, text, id=None):
     <!doctype html>
     <html>
         <body>
-            <strong style="font-size:50px;">일어나야만 하는 이</strong>기혁<strong style="font-size:50px;">유</strong>금진
+            <a href="/"><strong style="font-size:50px;">일어나야만 하는 이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
             <ol>
                 {content}
             </ol>
             {text}
             <ul>
-                {user_funcions}
+                <li><a href = /create/>create</a></li>
+                {update_delete}
             </ul>
         </body>
     </html>
@@ -252,3 +238,39 @@ def delete(id):
 
 
 app.run(host='0.0.0.0',debug=True)
+
+#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+def time_checker():
+    while True:
+        now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
+        time.sleep(1)
+
+
+
+
+
+#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+# def clock():
+#     ko_now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
+#     time.sleep(1)
+#     return ko_now_time
+
+# #알람 울리는 함수
+# def ringing_alarm():
+#     print(f'띠로리 - {clock()}') #~~임시~~
+
+# #알람 울리는 시간 계산
+# #만약 현재 시각과 저장해둔 알람의 시간이 일치할 경우 ringing_alarm 함수를 호출한다 == 알람이 울리게 한다
+# def when_toAlarm():
+#     for alarm in alarms:
+#         if f'{alarm["hour"]}시 {alarm["minute"]}분' == str(clock()):
+#             ringing_alarm() 
+
+
+# ing_clock = Thread(target= clock, args= ())
+# timing_alarm_check = Thread(target= when_toAlarm, args= ())
+# timing_alarm_check.start()
+# ing_clock.start()
+
+

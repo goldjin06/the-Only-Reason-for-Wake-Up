@@ -247,7 +247,7 @@ def delete(id):
 def ringring_alarm():
     print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
     now_sec = time.strftime('%S', time.localtime(time.time()))
-    time.sleep(60 - int(now_sec))
+    time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
 def time_checker():
     while True:

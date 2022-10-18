@@ -90,10 +90,16 @@ def r_missionType(mission):
 # 템플릿 함수
 # template -> 알람 목록
 # text -> 본문
-def template(content, text, id=None):
+def template(content, text, isFuction, id=None):
     update_delete = ''
-    if id != None:
+
+    if isFuction == 1:
         update_delete =f'''
+            <li><a href = /create/>create</a></li>
+        '''
+    elif isFuction == 2:
+        update_delete =f'''
+            <li><a href = /create/>create</a></li>
             <li><a href="/update/{id}/">update</a></li>
             <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete"></form></li>
         '''
@@ -107,7 +113,7 @@ def template(content, text, id=None):
             </ol>
             {text}
             <ul>
-                <li><a href = /create/>create</a></li>
+                
                 {update_delete}
             </ul>
         </body>
@@ -129,7 +135,7 @@ def getContents():
 #!!!여기서 오류나면 dictionary 자료형 살펴보기!!! 오류 안나면 이 주석 지워줘
 @app.route('/')
 def index():
-    return template(getContents(),'')
+    return template(getContents(),'',1)
 
 @app.route('/alarm/<int:id>/')
 def checkalarm(id):
@@ -139,7 +145,7 @@ def checkalarm(id):
             text = f'{(alarm["hour"])}시 {(alarm["minute"]):0>2}분에 울리는 알람입니다.'
             break
 
-    return template(getContents(), text, int(id))
+    return template(getContents(), text,2, int(id))
     
 
 @app.route('/create/', methods=['GET', 'POST'])
@@ -161,7 +167,7 @@ def create():
                 <input type="submit" value="저장">
             </form>
         '''
-        return template('', text)
+        return template('', text,0)
     elif request.method == 'POST':
         hour = int(request.form['hour'])
         minute = int(request.form['minute'])
@@ -201,7 +207,7 @@ def update(id):
                 <input type="submit" value="저장">
             </form>
         '''
-        return template('', text)
+        return template('', text,0)
     elif request.method == 'POST':
         beforeHour = 0
         beforeMinute = 0

@@ -265,30 +265,3 @@ if __name__ == '__main__':
     alarm_timing.start()
     app.run(host='0.0.0.0', threaded= True)
     
-
-
-#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-
-# def clock():
-#     ko_now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
-#     time.sleep(1)
-#     return ko_now_time
-
-# #알람 울리는 함수
-# def ringing_alarm():
-#     print(f'띠로리 - {clock()}') #~~임시~~
-
-# #알람 울리는 시간 계산
-# #만약 현재 시각과 저장해둔 알람의 시간이 일치할 경우 ringing_alarm 함수를 호출한다 == 알람이 울리게 한다
-# def when_toAlarm():
-#     for alarm in alarms:
-#         if f'{alarm["hour"]}시 {alarm["minute"]}분' == str(clock()):
-#             ringing_alarm() 
-
-
-# ing_clock = Thread(target= clock, args= ())
-# timing_alarm_check = Thread(target= when_toAlarm, args= ())
-# timing_alarm_check.start()
-# ing_clock.start()
-
-

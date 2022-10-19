@@ -106,8 +106,25 @@ def template(content, text, isFuction, id=None):
     return f'''
     <!doctype html>
     <html>
+        <head>
+            <style>
+                #title {{
+                    text-decoration: none;
+                    color: black;
+                }}
+                ul li a {{
+                    border-style: solid;
+                    background-color: blue;
+                    text-decoration: none;
+                    color: white;
+                    margin: 5px;
+                    weight: 50px;
+                    display: inline-block;
+                }}
+            </style>
+        <head>
         <body>
-            <a href="/"><strong style="font-size:50px;">일어나야만 하는 이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
+            <a href="/" id="title"><strong style="font-size:50px;">일어나야만 하는 이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
             <ol>
                 {content}
             </ol>

@@ -4,8 +4,11 @@ from threading import Thread
 import time
 import os
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 app = Flask(__name__)
 
 alarms = [

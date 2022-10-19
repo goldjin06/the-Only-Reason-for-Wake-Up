@@ -5,8 +5,6 @@ import time
 import os
 
 
-a for a 
-b for b
 
 app = Flask(__name__)
 

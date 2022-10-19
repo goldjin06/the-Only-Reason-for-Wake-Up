@@ -4,6 +4,10 @@ from threading import Thread
 import time
 import os
 
+
+a for a 
+b for b
+
 app = Flask(__name__)
 
 alarms = [

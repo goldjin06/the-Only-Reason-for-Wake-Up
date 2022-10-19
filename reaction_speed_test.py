@@ -25,138 +25,156 @@ GPIO.setwarnings(False)
 
 pwm = GPIO.PWM(piezzo_buzzer, 1)
 
+limit_time = random.randrange(1, 4)
+
 # Raspberry Pi pin configuration:
 RST = 24
 
+#디스플레이 세팅
 #128x64 display with hardware I2C:
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
 # Initialize library.
 disp.begin()
 width = disp.width
 height = disp.height
-# while True:
+
 #Clear display.
 disp.clear()
 disp.display()
 
 top = 10
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
+def show_title():
+    global width, height, disp, top
 
-#이미지 위에 텍스트 출력('This is reaction speed test')
-draw.text((10, top), 'This is', font=font, fill=255)
-draw.text((10, top+10), 'reaction speed', font=font, fill=255)
-draw.text((10, top+20), 'test!!', font=font, fill=255)
+    #화면 크기만큼의 빈껍데기 이미지 생성
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
 
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
+    #폰트설정(폰트디자인, 사이즈)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
 
-#5초만 쉬었다 갑시다~
-time.sleep(3)
+    #이미지 위에 텍스트 출력('This is reaction speed test')
+    draw.text((10, top), 'This is', font=font, fill=255)            
+    draw.text((10, top+10), 'reaction speed', font=font, fill=255)
+    draw.text((10, top+20), 'test!!', font=font, fill=255)
 
-#1에서 4까지의 무직위의 정수를 선택해 선택된 시간 이내에 버튼을 눌러야 한다.
-limit_time = random.randrange(1, 4) 
+    #이미지를 OLED로 출력
+    disp.image(image)
+    disp.display()
+
+#동치
+def show_limit_time_start_in_5():
+    global width, height, disp, limit_time, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
+    draw.text((30, top + 20), 'start in', font=font, fill=255)
+    draw.text((30, top + 30), '5 second', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
+
+# 동치
+def show_limit_time_start_in_4():
+    global width, height, disp, limit_time, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
+    draw.text((30, top + 20), 'start in', font=font, fill=255)
+    draw.text((30, top + 30), '4 second', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
+
+# 동치
+def show_limit_time_start_in_3():
+    global width, height, disp, limit_time, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
+    draw.text((30, top + 20), 'start in', font=font, fill=255)
+    draw.text((30, top + 30), '3 second', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
+
+# 동치미
+def show_limit_time_start_in_2():
+    global width, height, disp, limit_time, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
+    draw.text((30, top + 20), 'start in', font=font, fill=255)
+    draw.text((30, top + 30), '2 second', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
+
+# 동치
+def show_limit_time_start_in_1():
+    global width, height, disp, limit_time, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
+    draw.text((30, top + 20), 'start in', font=font, fill=255)
+    draw.text((30, top + 30), '1 second', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
+
+# 동치
+def show_mission_start():
+    global width, height, disp, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
+    draw.text((10, top), 'Mission', font=font, fill=255)
+    draw.text((30, top + 20), 'Start', font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
 
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
+show_title()
+time.sleep(3) # 3초만 쉬었다 갑시다~
 
-#이미지 위에 텍스트 출력(limit time) 
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-draw.text((30, top + 20), 'start in', font=font, fill=255)
-draw.text((30, top + 30), '5 second', font=font, fill=255)
-
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
-
+show_limit_time_start_in_5()
 time.sleep(1)
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
-
-#이미지 위에 텍스트 출력(limit time) 
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-draw.text((30, top + 20), 'start in', font=font, fill=255)
-draw.text((30, top + 30), '4 second', font=font, fill=255)
-
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
-
+show_limit_time_start_in_4()
 time.sleep(1)
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
-
-#이미지 위에 텍스트 출력(limit time) 
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-draw.text((30, top + 20), 'start in', font=font, fill=255)
-draw.text((30, top + 30), '3 second', font=font, fill=255)
-
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
-
+show_limit_time_start_in_3()
 time.sleep(1)
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
-
-#이미지 위에 텍스트 출력(limit time) 
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-draw.text((30, top + 20), 'start in', font=font, fill=255)
-draw.text((30, top + 30), '2 second', font=font, fill=255)
-
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
-
+show_limit_time_start_in_2()
 time.sleep(1)
 
-#화면 크기만큼의 빈껍데기 이미지 생성
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
-
-#이미지 위에 텍스트 출력(limit time) 
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-draw.text((30, top + 20), 'start in', font=font, fill=255)
-draw.text((30, top + 30), '1 second', font=font, fill=255)
-
+show_limit_time_start_in_1()
 time.sleep(1)
-#미션 시작!
 
-#이미지를 OLED로 출력
-disp.image(image)
-disp.display()
-
-
-image = Image.new('1', (width, height))
-draw = ImageDraw.Draw(image)
-
-font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
-draw.text((10, top), 'Mission', font=font, fill=255)
-draw.text((30, top + 20), 'Start', font=font, fill=255)
-
-disp.image(image)
-disp.display()
-
-
+show_mission_start()

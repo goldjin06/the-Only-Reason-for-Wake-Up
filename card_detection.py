@@ -37,6 +37,7 @@ with open(classFile, 'rt') as f:
 # Load a pre-trained neural network
 net = cv2.dnn.readNet(model, config)
 
+['teddy, teddy bear', '', ]
 
 # 이미지 파일 읽기
 cap = cv2.VideoCapture(0)

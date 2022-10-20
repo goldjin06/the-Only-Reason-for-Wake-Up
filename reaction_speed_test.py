@@ -65,7 +65,7 @@ def show_title():
     disp.display()
 
 #동치
-def show_limit_time_start_in_5():
+def display_times(left_time):
     global width, height, disp, limit_time, top
 
     image = Image.new('1', (width, height))
@@ -75,71 +75,7 @@ def show_limit_time_start_in_5():
     draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
     draw.text((30, top + 20), 'start in', font=font, fill=255)
-    draw.text((30, top + 30), '5 second', font=font, fill=255)
-
-    disp.image(image)
-    disp.display()
-
-# 동치
-def show_limit_time_start_in_4():
-    global width, height, disp, limit_time, top
-
-    image = Image.new('1', (width, height))
-    draw = ImageDraw.Draw(image)
-
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-    draw.text((30, top + 20), 'start in', font=font, fill=255)
-    draw.text((30, top + 30), '4 second', font=font, fill=255)
-
-    disp.image(image)
-    disp.display()
-
-# 동치
-def show_limit_time_start_in_3():
-    global width, height, disp, limit_time, top
-
-    image = Image.new('1', (width, height))
-    draw = ImageDraw.Draw(image)
-
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-    draw.text((30, top + 20), 'start in', font=font, fill=255)
-    draw.text((30, top + 30), '3 second', font=font, fill=255)
-
-    disp.image(image)
-    disp.display()
-
-# 동치미
-def show_limit_time_start_in_2():
-    global width, height, disp, limit_time, top
-
-    image = Image.new('1', (width, height))
-    draw = ImageDraw.Draw(image)
-
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-    draw.text((30, top + 20), 'start in', font=font, fill=255)
-    draw.text((30, top + 30), '2 second', font=font, fill=255)
-
-    disp.image(image)
-    disp.display()
-
-# 동치
-def show_limit_time_start_in_1():
-    global width, height, disp, limit_time, top
-
-    image = Image.new('1', (width, height))
-    draw = ImageDraw.Draw(image)
-
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
-    draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
-    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
-    draw.text((30, top + 20), 'start in', font=font, fill=255)
-    draw.text((30, top + 30), '1 second', font=font, fill=255)
+    draw.text((30, top + 30), '{0} second'.format(left_time), font=font, fill=255)
 
     disp.image(image)
     disp.display()
@@ -162,19 +98,9 @@ def show_mission_start():
 show_title()
 time.sleep(3) # 3초만 쉬었다 갑시다~
 
-show_limit_time_start_in_5()
-time.sleep(1)
-
-show_limit_time_start_in_4()
-time.sleep(1)
-
-show_limit_time_start_in_3()
-time.sleep(1)
-
-show_limit_time_start_in_2()
-time.sleep(1)
-
-show_limit_time_start_in_1()
-time.sleep(1)
+for i in range(5, 0, -1):
+    display_times(i)
+    time.sleep(1)
 
 show_mission_start()
+

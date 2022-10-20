@@ -148,6 +148,7 @@ disp_mission_start()
 while True:
     #Flase 리턴받음 == 미션 성공
     if do_mission_untill_clear() == False:
+        GPIO.output(led, GPIO.LOW)
         break
     else:
         #True 리턴받음 == 미션 실패

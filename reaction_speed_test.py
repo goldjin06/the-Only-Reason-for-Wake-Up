@@ -1,5 +1,4 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
-from ssl import VERIFY_ALLOW_PROXY_CERTS
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO

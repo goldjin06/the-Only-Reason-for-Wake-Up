@@ -94,6 +94,12 @@ def disp_mission_start():
     disp.image(image)
     disp.display()
 
+#유저에게 미션 결과를 알려주는 함수
+def disp_mission_result():
+    #임시
+    pass
+
+
 #미션 제한시간을 유저에게 알려줌 and 5초 카운트 이후 미션 시작
 def wait_mission_and_start():
     for i in range(5, 0, -1):
@@ -152,13 +158,13 @@ while True:
         break
     else:
         #True 리턴받음 == 미션 실패
-        disp_mission_failed()
+        disp_mission_result('failed')
         time.sleep(2)
         limit_time = random.randrange(1, 4)
         wait_mission_and_start()
         
 #미션 클리어를 유저에게 보여주는 함수
-disp_mission_clear()
+disp_mission_result('clear')
 
 
 

@@ -95,7 +95,7 @@ def disp_mission_start():
     disp.display()
 
 #유저에게 미션 결과를 알려주는 함수
-def disp_mission_result():
+def disp_mission_result(result):
     #임시
     pass
 
@@ -165,6 +165,7 @@ while True:
         
 #미션 클리어를 유저에게 보여주는 함수
 disp_mission_result('clear')
+
 
 
 

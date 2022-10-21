@@ -128,6 +128,8 @@ def do_mission_untill_clear():
     is_not_complete = True
 
     while True:
+        print(val_R, val_B, val_Y)
+      
         #현재 시간 기록
         ing_time = time.time()
         #만약 제한시간이 지나면 무한반복문 빠져나오기
@@ -159,16 +161,17 @@ while True:
     else:
         #True 리턴받음 == 미션 실패
         disp_mission_result('failed')
+        GPIO.output(led, GPIO.LOW)
+        print("mission failed")
         time.sleep(2)
+        
         limit_time = random.randrange(1, 4)
+        print("Restart!")
         wait_mission_and_start()
         
 #미션 클리어를 유저에게 보여주는 함수
 disp_mission_result('clear')
-
-
-
-
+print("mission clear")
 
 
 

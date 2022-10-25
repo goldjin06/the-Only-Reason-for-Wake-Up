@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+import random
 
 def detection(img):
     blob = cv2.dnn.blobFromImage(img, scalefactor=1, size=(224, 224), mean=(104, 117, 123))
@@ -37,10 +38,17 @@ with open(classFile, 'rt') as f:
 # Load a pre-trained neural network
 net = cv2.dnn.readNet(model, config)
 
-picture = ['teddy, teddy bear', 'reflex camera', '']
-
 # 이미지 파일 읽기
 cap = cv2.VideoCapture(0)
+
+
+###### 여기부터 소스코드 #################################################################
+
+picture = ['teddy, teddy bear', 'banana', 'daisy']
+random.shuffle(picture)
+
+selected_picture = picture[0]
+print("**detect {0}**".format(selected_picture))
 
 while True:
     if not cap.isOpened():
@@ -56,7 +64,7 @@ while True:
     a = detection(img)
     print(a)
 
-    if a == 'teddy, teddy bear':
+    if a == selected_picture:
         print('완료')
         break
 

@@ -1,10 +1,9 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
-from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO
 import time
-import random
+import random   
 
 BUTTON_RED = 9
 BUTTON_YELLOW =  10
@@ -190,5 +189,8 @@ while True:
 disp_mission_result('clear')
 print("mission clear")
 
+time.sleep(4)
+disp.clear()
+disp.display()
 
 

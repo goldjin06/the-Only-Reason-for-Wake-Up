@@ -2,6 +2,26 @@ from dis import dis
 import random
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
+import RPi.GPIO as GPIO
+import time
+
+button_red = 9
+button_yellow =  10
+button_blue = 11
+
+piezzo_buzzer = 15
+
+led = 21
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(button_red, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_yellow, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(piezzo_buzzer, GPIO.OUT)
+GPIO.setup(led, GPIO.OUT)
+
+GPIO.setwarnings(False)
 
 
 # Raspberry Pi pin configuration:
@@ -86,15 +106,33 @@ while True:
 
     disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
 
-    answer = input('''{0} {1} {2} = ?
-        (1:red){3} (2:yellow){4} (3:blue){5}
-        >>> '''.format(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2]))
+    while True:
+        answer = 0
+        red = GPIO.input(button_red)
+        yellow = GPIO.input(button_yellow)
+        blue = GPIO.input(button_blue)
+        if red and not yellow and not blue:
+            answer = 1
+        elif not red and yellow and not blue:
+            answer = 2
+        elif not red and not yellow and blue:
+            answer = 3
+        
+        if answerlist[int(answer)-1] == cal:
+            print('정답')
+            disp_res('Correct')
+            break
+        elif answer is not 0:
+            print('오답')
+            disp_res('wrong')
+            time.sleep(2)
+            disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
 
-    if answerlist[int(answer)-1] == cal:
-        print('정답')
-        disp_res('Correct')
-        break
-    else:
-        print('오답')
-        disp_res('wrong')
+
+
+    # answer = input('''{0} {1} {2} = ?
+    #     (1:red){3} (2:yellow){4} (3:blue){5}
+    #     >>> '''.format(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2]))
+
+    
             

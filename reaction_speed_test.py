@@ -98,8 +98,18 @@ def disp_mission_start():
 
 #유저에게 미션 결과를 알려주는 함수
 def disp_mission_result(result):
-    #임시
-    pass
+    global width, height, disp, top
+
+    image = Image.new('1', (width, height))
+    draw = ImageDraw.Draw(image)
+
+    font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
+    
+    draw.text((10, top), 'Mission', font=font, fill=255)
+    draw.text((30, top + 20), '{0}'.format(result), font=font, fill=255)
+
+    disp.image(image)
+    disp.display()
 
 
 #미션 제한시간을 유저에게 알려줌 and 5초 카운트 이후 미션 시작
@@ -141,8 +151,9 @@ def do_mission_untill_clear():
         
         #만약 제한시간 내에 버튼을 눌러 미션을 성공하면 미션 성공으로 변수값 바꿔주고 break
         elif val_R == 1 or val_B == 1 or val_Y == 1:
-            is_not_complete == False
+            is_not_complete = False
             return is_not_complete
+
     #미션 성공, 실패 여부 리턴
     return is_not_complete
 
@@ -156,6 +167,8 @@ disp_mission_start()
 
 #미션을 실패할때까지 미션 실행 함수를 돌린다. 성공, 실패 여부를 함수에서 리턴받음
 while True:
+    GPIO.output(led, GPIO.LOW)
+
     #Flase 리턴받음 == 미션 성공
     if do_mission_untill_clear() == False:
         GPIO.output(led, GPIO.LOW)
@@ -164,6 +177,7 @@ while True:
         #True 리턴받음 == 미션 실패
         disp_mission_result('failed')
         GPIO.output(led, GPIO.LOW)
+
         print("mission failed")
         time.sleep(2)
 

@@ -27,37 +27,37 @@ pwm = GPIO.PWM(piezzo_buzzer, 1)
 # 여기부터 소스코드 ################################################################
 
 def playAirplane():
-    beat = 0.5
-    melody(mi, 1.5)
-    melody(re, 0.5)
-    melody(do, 1)
-    melody(re, 1)
+    beat = 0.3
+    melody('mi', 1.5)
+    melody('re', 0.5)
+    melody('do', 1)
+    melody('re', 1)
     for i in range(3):
-        melody(mi, 1)
+        melody('mi', 1)
         time.sleep(0.01)
     time.sleep(beat)
     for i in range(3):
-        melody(re, 1)
+        melody('re', 1)
         time.sleep(0.01)
     time.sleep(beat)
     for i in range(3):
-        melody(mi, 1)
+        melody('mi', 1)
         time.sleep(0.01) 
     time.sleep(beat) # 떴다떴다비행기날아라날아라
-    melody(mi, 1.5)
-    melody(re, 0.5)
-    melody(do, 1)
-    melody(re, 1)
+    melody('mi', 1.5)
+    melody('re', 0.5)
+    melody('do', 1)
+    melody('re', 1)
     for i in range(3):
-        melody(mi, 1)
+        melody('mi', 1)
         time.sleep(0.01)
     time.sleep(beat)
     for i in range(2):
-        melody(re, 1)
+        melody('re', 1)
         time.sleep(0.01)
-    melody(mi, 1)
-    melody(re, 1)
-    melody(do, 1)
+    melody('mi', 1)
+    melody('re', 1)
+    melody('do', 1)
     time.sleep(beat * 3)
     
 
@@ -77,7 +77,7 @@ def melody(name, beat):
         pwm.ChangeFrequency(440)
     elif name == 'si':
         pwm.ChangeFrequency(494)
-    time.sleep(bear * 0.5)
+    time.sleep(bear * 0.3)
     pwm.stop()
 
 

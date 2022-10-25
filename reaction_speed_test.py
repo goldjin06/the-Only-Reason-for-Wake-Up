@@ -1,27 +1,29 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
+from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO
 import time
 import random
 
-button_red = 9
-button_yellow =  10
-button_blue = 11
+BUTTON_RED = 9
+BUTTON_YELLOW =  10
+BUTTON_BLUE = 11
 
 piezzo_buzzer = 15
 
 led = 21
 
+GPIO.setwarnings(False)
+
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(button_red, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(button_yellow, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(BUTTON_RED, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(BUTTON_YELLOW, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(BUTTON_BLUE, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
-GPIO.setwarnings(False)
 
 pwm = GPIO.PWM(piezzo_buzzer, 1)
 
@@ -109,17 +111,13 @@ def wait_mission_and_start():
 #미션 실행 함수
 def do_mission_untill_clear():
     #전역변수 명시
-    global limit_time, button_blue, button_red, button_yellow
+    global limit_time, BUTTON_BLUE, BUTTON_RED, BUTTON_YELLOW
 
     #범위 내 랜덤한 시간동안 대기 이후 led on
     wait_time = random.randrange(1, 6)
     time.sleep(wait_time)
 
     GPIO.output(led, GPIO.HIGH)
-
-    val_R = GPIO.input(button_red)
-    val_Y = GPIO.input(button_yellow)
-    val_B = GPIO.input(button_blue)
 
     #제한 시간 세기 - 미션 시작한 시간 기록
     start_time = time.time()
@@ -128,19 +126,23 @@ def do_mission_untill_clear():
     is_not_complete = True
 
     while True:
-        print(val_R, val_B, val_Y)
-      
+        val_R = GPIO.input(BUTTON_RED)
+        val_Y = GPIO.input(BUTTON_YELLOW)
+        val_B = GPIO.input(BUTTON_BLUE)
+
         #현재 시간 기록
         ing_time = time.time()
+
+        print('times : ', limit_time, ing_time - start_time)
+        print('values : ', val_B, val_R, val_Y)
         #만약 제한시간이 지나면 무한반복문 빠져나오기
-        if ing_time - start_time == limit_time: 
+        if ing_time - start_time >= limit_time: 
             break
         
         #만약 제한시간 내에 버튼을 눌러 미션을 성공하면 미션 성공으로 변수값 바꿔주고 break
         elif val_R == 1 or val_B == 1 or val_Y == 1:
             is_not_complete == False
-            break
-    
+            return is_not_complete
     #미션 성공, 실패 여부 리턴
     return is_not_complete
 
@@ -164,10 +166,11 @@ while True:
         GPIO.output(led, GPIO.LOW)
         print("mission failed")
         time.sleep(2)
-        
+
         limit_time = random.randrange(1, 4)
         print("Restart!")
         wait_mission_and_start()
+        disp_mission_start()
         
 #미션 클리어를 유저에게 보여주는 함수
 disp_mission_result('clear')

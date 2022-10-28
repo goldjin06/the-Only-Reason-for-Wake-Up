@@ -79,7 +79,7 @@ def melody(name, beat):
         pwm.ChangeFrequency(440)
     elif name == 'si':
         pwm.ChangeFrequency(494)
-    time.sleep(bear * 0.3)
+    time.sleep(beat * 0.3)
     pwm.stop()
 
 

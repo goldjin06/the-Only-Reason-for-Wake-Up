@@ -3,7 +3,7 @@ from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 import RPi.GPIO as GPIO
-import functions.alarmpi as buz
+from functions.alarmpi import playAirplane
 
 app = Flask(__name__)
 
@@ -283,7 +283,7 @@ GPIO.setwarnings(False)
 pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 def buzzer_cry():
-    buz.playAirplane()
+    playAirplane()
 # cry_forever = Thread(target=buzzer_cry, args= ())
 
 def ringring_alarm(mission_type):

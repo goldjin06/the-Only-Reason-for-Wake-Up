@@ -322,6 +322,3 @@ if __name__ == '__main__':
     alarm_timing.start()
     app.run(host='0.0.0.0', threaded= True)
     
-
-
-    testsetsete

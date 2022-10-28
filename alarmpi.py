@@ -2,6 +2,8 @@
 import RPi.GPIO as GPIO
 import time
 
+GPIO.setwarnings(False)
+
 button_red = 9
 button_yellow =  10
 button_blue = 11
@@ -18,7 +20,7 @@ GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
-GPIO.setwarnings(False)
+
 
 pwm = GPIO.PWM(piezzo_buzzer, 1)
 

@@ -3,6 +3,8 @@ from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 import os
+import RPi.GPIO as GPIO
+import alarmpi as buz
 
 app = Flask(__name__)
 
@@ -261,8 +263,47 @@ def delete(id):
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-def ringring_alarm():
+button_red = 9
+button_yellow =  10
+button_blue = 11
+
+piezzo_buzzer = 15
+
+led = 21
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(button_red, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_yellow, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(piezzo_buzzer, GPIO.OUT)
+GPIO.setup(led, GPIO.OUT)
+
+GPIO.setwarnings(False)
+
+pwm = GPIO.PWM(piezzo_buzzer, 1)
+
+
+
+def buzzer_cry():
+    buz.playAirplane()
+# cry_forever = Thread(target=buzzer_cry, args= ())
+
+def ringring_alarm(mission_type):
     print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
+    #부저 작동 시작
+    buzzer_cry()
+
+    #미션 실행 설계(임시)
+    if mission_type== "랜덤":
+        pass
+    elif mission_type == "사진매칭":
+        pass
+    elif mission_type == "반응속도테스트":
+        pass
+    elif mission_type == "연산":
+        pass
+
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
@@ -272,7 +313,7 @@ def time_checker():
         time.sleep(3)
         for alarm in alarms:
             if f'{alarm["hour"]}시 {alarm["minute"]}분' == now_time:
-                ringring_alarm()
+                ringring_alarm(alarm["missionType"])
                 print(now_time)
                 print(f'{alarm["hour"]}시 {alarm["minute"]}분')
             else:
@@ -286,3 +327,4 @@ if __name__ == '__main__':
     
 
 
+    

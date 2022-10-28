@@ -3,7 +3,7 @@ from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 import RPi.GPIO as GPIO
-from .functions.alarmpi import playAirplane
+import functions.alarmpi as buz
 
 app = Flask(__name__)
 
@@ -166,7 +166,7 @@ def checkalarm(id):
     return template(getContents(), text,2, int(id))
     
 
-@app.route('/create/', methods=['GET', 'POST'])
+@app.route('/create/', methods=['GET', 'POST']) 
 def create():
     global nextId
     if request.method == 'GET':
@@ -283,7 +283,7 @@ GPIO.setwarnings(False)
 pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 def buzzer_cry():
-    playAirplane()
+    buz.playAirplane()
 # cry_forever = Thread(target=buzzer_cry, args= ())
 
 def ringring_alarm(mission_type):

@@ -3,9 +3,6 @@ from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 import RPi.GPIO as GPIO
-<<<<<<< HEAD
-from functions.alarmpi import playAirplane
-=======
 import cv2
 import numpy as np
 import time
@@ -14,7 +11,6 @@ from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 from .functions.alarmpi import playAirplane
->>>>>>> 60eaf59137cd426575ab4bb7f98a01dc2b37ec85
 
 
 GPIO.setwarnings(False)

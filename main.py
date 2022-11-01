@@ -308,7 +308,7 @@ def ringring_alarm(mission_type):
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
         pass
-    elif mission_type == "사진매칭":
+    elif mission_type == "사진 매칭":
         card_mission.start()
         cry_forever.join()
 

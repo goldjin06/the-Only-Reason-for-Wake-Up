@@ -6,7 +6,17 @@ from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO
+RST = 24
 
+#디스플레이 세팅
+#128x64 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# Initialize library.
+disp.begin()
+width = disp.width
+height = disp.height
+top = 10
 
 def disp_mission_start(selected_picture):
     global width, height, disp, top
@@ -37,8 +47,6 @@ def mission_complete():
 def detection(img):
     blob = cv2.dnn.blobFromImage(img, scalefactor=1, size=(224, 224), mean=(104, 117, 123))
 
-
-
 # blob 이미지를 네트워크 입력으로 설정
     net.setInput(blob)
 
@@ -59,23 +67,13 @@ def detection(img):
     return classNames[classId]
 
 def start():
-    RST = 24
-
-    #디스플레이 세팅
-    #128x64 display with hardware I2C:
-    disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-    # Initialize library.
-    disp.begin()
-    width = disp.width
-    height = disp.height
+    
 
     #Clear display.
     disp.clear()
     disp.display()
 
-    top = 10
-
+    
 
     # model, config, classFile 설정
     model = './dnn/bvlc_googlenet.caffemodel'

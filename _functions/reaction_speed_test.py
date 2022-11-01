@@ -155,42 +155,42 @@ def do_mission_untill_clear():
 
     #미션 성공, 실패 여부 리턴
     return is_not_complete
+def start():
+    disp_title()
+    time.sleep(3) # 3초만 쉬었다 갑시다~
 
-disp_title()
-time.sleep(3) # 3초만 쉬었다 갑시다~
+    #미션 제한시간을 유저에게 알려줌 and 5초 카운트 이후 미션 시작
+    wait_mission_and_start()
 
-#미션 제한시간을 유저에게 알려줌 and 5초 카운트 이후 미션 시작
-wait_mission_and_start()
+    disp_mission_start()
 
-disp_mission_start()
-
-#미션을 실패할때까지 미션 실행 함수를 돌린다. 성공, 실패 여부를 함수에서 리턴받음
-while True:
-    GPIO.output(led, GPIO.LOW)
-
-    #Flase 리턴받음 == 미션 성공
-    if do_mission_untill_clear() == False:
-        GPIO.output(led, GPIO.LOW)
-        break
-    else:
-        #True 리턴받음 == 미션 실패
-        disp_mission_result('failed')
+    #미션을 실패할때까지 미션 실행 함수를 돌린다. 성공, 실패 여부를 함수에서 리턴받음
+    while True:
         GPIO.output(led, GPIO.LOW)
 
-        print("mission failed")
-        time.sleep(2)
+        #Flase 리턴받음 == 미션 성공
+        if do_mission_untill_clear() == False:
+            GPIO.output(led, GPIO.LOW)
+            break
+        else:
+            #True 리턴받음 == 미션 실패
+            disp_mission_result('failed')
+            GPIO.output(led, GPIO.LOW)
 
-        limit_time = random.randrange(1, 4)
-        print("Restart!")
-        wait_mission_and_start()
-        disp_mission_start()
-        
-#미션 클리어를 유저에게 보여주는 함수
-disp_mission_result('clear')
-print("mission clear")
+            print("mission failed")
+            time.sleep(2)
 
-time.sleep(4)
-disp.clear()
-disp.display()
+            limit_time = random.randrange(1, 4)
+            print("Restart!")
+            wait_mission_and_start()
+            disp_mission_start()
+            
+    #미션 클리어를 유저에게 보여주는 함수
+    disp_mission_result('clear')
+    print("mission clear")
+
+    time.sleep(4)
+    disp.clear()
+    disp.display()
 
 

@@ -92,34 +92,34 @@ cap = cv2.VideoCapture(0)
 
 
 ###### 여기부터 소스코드 #################################################################
+def start():
+    picture = ['teddy, teddy bear', 'banana', 'daisy']
+    random.shuffle(picture)
 
-picture = ['teddy, teddy bear', 'banana', 'daisy']
-random.shuffle(picture)
+    selected_picture = picture[0]
+    print("**detect {0}**".format(selected_picture))
+    disp_mission_start(selected_picture)
 
-selected_picture = picture[0]
-print("**detect {0}**".format(selected_picture))
-disp_mission_start(selected_picture)
+    while True:
+        if not cap.isOpened():
+            print('Camera open failed')
+            exit()
 
-while True:
-    if not cap.isOpened():
-        print('Camera open failed')
-        exit()
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-    ret, frame = cap.read()
-    if not ret:
-        break
+        img = frame
+        # img = cv2.imread('bear.jpg')
+        a = detection(img)
+        print(a)
 
-    img = frame
-    # img = cv2.imread('bear.jpg')
-    a = detection(img)
-    print(a)
+        if a == selected_picture:
+            print('완료')
+            break
 
-    if a == selected_picture:
-        print('완료')
-        break
+        time.sleep(1)
 
-    time.sleep(1)
-
-# blob 이미지 생성
-cap.release()
-cv2.destroyAllWindows()
+    # blob 이미지 생성
+    cap.release()
+    cv2.destroyAllWindows()

@@ -10,6 +10,9 @@ import random
 import Adafruit_SSD1306
 import _functions.alarmpi as buz
 from PIL import Image, ImageDraw, ImageFont
+import _functions.calculate as calcul_mission
+import _functions.card_detection as card_mission
+import _functions.reaction_speed_test as reaction_mission
 
 GPIO.setwarnings(False)
 
@@ -293,12 +296,14 @@ def delete(id):
 
 def buzzer_cry():
     buz.ringAlarm()
-# cry_forever = Thread(target=buzzer_cry, args= ())
+
+cry_forever = Thread(target=buzzer_cry, args= ())
 
 def ringring_alarm(mission_type):
     print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
     #부저 작동 시작
-    buzzer_cry()
+    
+    cry_forever.start()
 
     #미션 실행 설계(임시)
     if mission_type== "랜덤":

@@ -1,2 +1,3 @@
-import functions.alarmpi as buz
+import _functions.alarmpi as buz
 
+buz.playAirplane()

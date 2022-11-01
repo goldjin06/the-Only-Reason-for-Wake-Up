@@ -3,18 +3,14 @@ from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
 import time
 import RPi.GPIO as GPIO
-<<<<<<< HEAD
-from functions.alarmpi import playAirplane
-=======
 import cv2
 import numpy as np
 import time
 import random
-from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 from .functions.alarmpi import playAirplane
->>>>>>> 60eaf59137cd426575ab4bb7f98a01dc2b37ec85
+
 
 
 GPIO.setwarnings(False)
@@ -296,25 +292,7 @@ def delete(id):
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-button_red = 9
-button_yellow =  10
-button_blue = 11
 
-piezzo_buzzer = 15
-
-led = 21
-
-GPIO.setmode(GPIO.BCM)
-
-GPIO.setup(button_red, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(button_yellow, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(piezzo_buzzer, GPIO.OUT)
-GPIO.setup(led, GPIO.OUT)
-
-GPIO.setwarnings(False)
-
-pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 def buzzer_cry():
     playAirplane()

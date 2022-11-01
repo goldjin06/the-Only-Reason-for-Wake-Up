@@ -302,18 +302,23 @@ cry_forever = Thread(target=buzzer_cry, args= ())
 def ringring_alarm(mission_type):
     print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
     #부저 작동 시작
-    
+
     cry_forever.start()
 
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
         pass
     elif mission_type == "사진매칭":
-        pass
+        card_mission.start()
+        cry_forever.join()
+
     elif mission_type == "반응속도테스트":
-        pass
+        reaction_mission.start()
+        cry_forever.join()
+        
     elif mission_type == "연산":
-        pass
+        calcul_mission.start()
+        cry_forever.join()
 
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기

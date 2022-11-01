@@ -30,7 +30,6 @@ pwm = GPIO.PWM(piezzo_buzzer, 1)
 # 여기부터 소스코드 ################################################################
 
 def playAirplane():
-    print("111")
     beat = 0.3
     melody('mi', 1.5)
     melody('re', 0.5)
@@ -100,7 +99,7 @@ def playSchoolring():
     melody('do', 4)
 
 def melody(name, beat):
-    pwm.start(5)
+    pwm.start(50)
     if name == 'do':
         pwm.ChangeFrequency(262)
     elif name == 're':
@@ -130,4 +129,3 @@ def ringAlarm():
             playAirplane()
 
 ringAlarm()
-

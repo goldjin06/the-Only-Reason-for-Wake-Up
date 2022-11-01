@@ -10,8 +10,6 @@ import random
 import Adafruit_SSD1306
 import _functions.alarmpi as buz
 from PIL import Image, ImageDraw, ImageFont
-from _functions.alarmpi import playAirplane
-
 
 GPIO.setwarnings(False)
 

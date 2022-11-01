@@ -295,7 +295,7 @@ def delete(id):
 
 
 def buzzer_cry():
-    buz.playAirplane()
+    buz.ringAlarm()
 # cry_forever = Thread(target=buzzer_cry, args= ())
 
 def ringring_alarm(mission_type):

@@ -23,7 +23,7 @@ GPIO.setup(led, GPIO.OUT)
 
 GPIO.setwarnings(False)
 
-def calculate_mission():
+def start():
     # Raspberry Pi pin configuration:
     RST = 24
 
@@ -86,6 +86,8 @@ def calculate_mission():
             return('*')
         elif number == 3:
             return('-')
+
+
     while True:
 
         num1 = random.randint(1, 20) # 정수 하나 랜덤

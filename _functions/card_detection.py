@@ -7,22 +7,6 @@ import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO
 
-RST = 24
-
-#디스플레이 세팅
-#128x64 display with hardware I2C:
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-# Initialize library.
-disp.begin()
-width = disp.width
-height = disp.height
-
-#Clear display.
-disp.clear()
-disp.display()
-
-top = 10
 
 def disp_mission_start(selected_picture):
     global width, height, disp, top
@@ -74,25 +58,43 @@ def detection(img):
     
     return classNames[classId]
 
+def start():
+    RST = 24
 
-# model, config, classFile 설정
-model = './dnn/bvlc_googlenet.caffemodel'
-config = './dnn/deploy.prototxt'
-classFile = './dnn/classification_classes_ILSVRC2012.txt'
+    #디스플레이 세팅
+    #128x64 display with hardware I2C:
+    disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 
-classNames = None
-with open(classFile, 'rt') as f:
-    classNames = f.read().rstrip('\n').split('\n')
+    # Initialize library.
+    disp.begin()
+    width = disp.width
+    height = disp.height
 
-# Load a pre-trained neural network
-net = cv2.dnn.readNet(model, config)
+    #Clear display.
+    disp.clear()
+    disp.display()
 
-# 이미지 파일 읽기
-cap = cv2.VideoCapture(0)
+    top = 10
+
+
+    # model, config, classFile 설정
+    model = './dnn/bvlc_googlenet.caffemodel'
+    config = './dnn/deploy.prototxt'
+    classFile = './dnn/classification_classes_ILSVRC2012.txt'
+
+    classNames = None
+    with open(classFile, 'rt') as f:
+        classNames = f.read().rstrip('\n').split('\n')
+
+    # Load a pre-trained neural network
+    net = cv2.dnn.readNet(model, config)
+
+    # 이미지 파일 읽기
+    cap = cv2.VideoCapture(0)
 
 
 ###### 여기부터 소스코드 #################################################################
-def start():
+
     picture = ['teddy, teddy bear', 'banana', 'daisy']
     random.shuffle(picture)
 

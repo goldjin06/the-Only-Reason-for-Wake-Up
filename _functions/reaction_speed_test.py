@@ -38,6 +38,7 @@ disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 disp.begin()
 width = disp.width
 height = disp.height
+top = 10
 
 def disp_title():
     global width, height, disp, top
@@ -156,7 +157,7 @@ def start():
     disp.clear()
     disp.display()
 
-    top = 10
+    
     
     disp_title()
     time.sleep(3) # 3초만 쉬었다 갑시다~

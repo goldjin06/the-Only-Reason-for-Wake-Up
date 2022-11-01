@@ -8,8 +8,9 @@ import numpy as np
 import time
 import random
 import Adafruit_SSD1306
-# from PIL import Image, ImageDraw, ImageFont
 import _functions.alarmpi as buz
+from PIL import Image, ImageDraw, ImageFont
+from _functions.alarmpi import playAirplane
 
 
 GPIO.setwarnings(False)

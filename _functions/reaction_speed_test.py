@@ -134,6 +134,8 @@ def do_mission_untill_clear():
     return is_not_complete
     
 def start():
+    global limit_time, width, height, top
+    
     limit_time = random.randrange(1, 4)
 
     # Raspberry Pi pin configuration:
@@ -153,9 +155,6 @@ def start():
     disp.display()
 
     top = 10
-
-
-    global limit_time
     
     disp_title()
     time.sleep(3) # 3초만 쉬었다 갑시다~

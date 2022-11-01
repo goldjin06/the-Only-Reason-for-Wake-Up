@@ -23,6 +23,22 @@ GPIO.setup(BUTTON_BLUE, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
+global limit_time, width, height, top
+    
+limit_time = random.randrange(1, 4)
+
+# Raspberry Pi pin configuration:
+RST = 24
+
+#디스플레이 세팅
+#128x64 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# Initialize library.
+disp.begin()
+width = disp.width
+height = disp.height
+
 def disp_title():
     global width, height, disp, top
 
@@ -132,23 +148,9 @@ def do_mission_untill_clear():
 
     #미션 성공, 실패 여부 리턴
     return is_not_complete
-    
+
 def start():
-    global limit_time, width, height, top
     
-    limit_time = random.randrange(1, 4)
-
-    # Raspberry Pi pin configuration:
-    RST = 24
-
-    #디스플레이 세팅
-    #128x64 display with hardware I2C:
-    disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-    # Initialize library.
-    disp.begin()
-    width = disp.width
-    height = disp.height
 
     #Clear display.
     disp.clear()

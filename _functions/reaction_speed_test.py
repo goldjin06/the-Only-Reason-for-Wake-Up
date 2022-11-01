@@ -195,5 +195,6 @@ def start():
     time.sleep(4)
     disp.clear()
     disp.display()
+    return 0
 
 

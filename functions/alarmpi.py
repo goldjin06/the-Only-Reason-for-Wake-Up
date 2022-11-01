@@ -1,6 +1,7 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
 import RPi.GPIO as GPIO
 import time
+import random
 
 GPIO.setwarnings(False)
 
@@ -62,6 +63,40 @@ def playAirplane():
     melody('do', 1)
     time.sleep(beat * 3)
     
+def playSchoolring():
+    beat = 0.3
+    melody('sol', 1)
+    time.sleep(0.01)
+    melody('sol', 1)
+    melody('la', 1)
+    time.sleep(0.01)
+    melody('la', 1)
+    melody('sol', 1)
+    time.sleep(0.01)
+    melody('sol', 1)
+    melody('mi', 2)
+    melody('sol', 1)
+    time.sleep(0.01)
+    melody('sol', 1)
+    melody('mi', 1)
+    time.sleep(0.01)
+    melody('mi', 1)
+    melody('re', 4) # 학교종이땡땡땡 여기모여라
+    melody('sol', 1)
+    time.sleep(0.01)
+    melody('sol', 1)
+    melody('la', 1)
+    time.sleep(0.01)
+    melody('la', 1)
+    melody('sol', 1)
+    time.sleep(0.01)
+    melody('sol', 1)
+    melody('mi', 2)
+    melody('sol', 1)
+    melody('mi', 1)
+    melody('re', 1)
+    melody('mi', 1)
+    melody('do', 4)
 
 def melody(name, beat):
     pwm.start()
@@ -82,5 +117,13 @@ def melody(name, beat):
     time.sleep(beat * 0.3)
     pwm.stop()
 
+def ringAlarm():
+    a = random.randint(1, 2)
+    print(a)
 
-playAirplane()
+    if a == 1:
+        while True:
+            playSchoolring()
+    else:
+        while True:
+            playAirplane()

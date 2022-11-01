@@ -155,7 +155,10 @@ def do_mission_untill_clear():
 
     #미션 성공, 실패 여부 리턴
     return is_not_complete
+
 def start():
+    global limit_time
+    
     disp_title()
     time.sleep(3) # 3초만 쉬었다 갑시다~
 

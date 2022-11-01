@@ -99,7 +99,7 @@ def playSchoolring():
     melody('do', 4)
 
 def melody(name, beat):
-    pwm.start()
+    pwm.start(5)
     if name == 'do':
         pwm.ChangeFrequency(262)
     elif name == 're':

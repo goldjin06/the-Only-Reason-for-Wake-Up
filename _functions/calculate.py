@@ -122,7 +122,7 @@ while True:
             print('정답')
             disp_res('Correct')
             break
-        elif answer is not 0:
+        elif answer != 0:
             print('오답')
             disp_res('wrong')
             time.sleep(2)

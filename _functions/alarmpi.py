@@ -129,5 +129,3 @@ def ringAlarm():
         while True:
             playAirplane()
 
-ringAlarm()
-

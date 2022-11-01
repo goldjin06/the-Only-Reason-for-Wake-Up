@@ -9,8 +9,7 @@ import time
 import random
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
-from .functions.alarmpi import playAirplane
-
+from ._functions.alarmpi import playAirplane
 
 
 GPIO.setwarnings(False)

@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 import _functions.calculate as calcul_mission
 import _functions.card_detection as card_mission
 import _functions.reaction_speed_test as reaction_mission
+import os
 
 GPIO.setwarnings(False)
 
@@ -297,8 +298,6 @@ def delete(id):
 def buzzer_cry():
     buz.ringAlarm()
 
-cry_forever = Thread(target=buzzer_cry, args= ())
-
 def ringring_alarm(mission_type):
     print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
     #부저 작동 시작
@@ -314,7 +313,10 @@ def ringring_alarm(mission_type):
 
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
-        cry_forever.join()
+        pid = os.getpid()
+        print('pid : {0}'.format(pid))
+        os.kill(pid, 2)
+        # cry_forever.join()
         
     elif mission_type == "연산":
         calcul_mission.start()
@@ -336,6 +338,7 @@ def time_checker():
                 pass
 
 alarm_timing = Thread(target= time_checker, args= ())
+cry_forever = Thread(target=buzzer_cry, args= ())
 
 if __name__ == '__main__':
     alarm_timing.start()

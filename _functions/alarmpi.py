@@ -1,4 +1,31 @@
+# 이 소스 복사해서 나중에 붙여넣을예정
+import RPi.GPIO as GPIO
+import time
 import random
+
+GPIO.setwarnings(False)
+
+button_red = 9
+button_yellow =  10
+button_blue = 11
+
+piezzo_buzzer = 15
+
+led = 21
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(button_red, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_yellow, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button_blue, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(piezzo_buzzer, GPIO.OUT)
+GPIO.setup(led, GPIO.OUT)
+
+
+
+pwm = GPIO.PWM(piezzo_buzzer, 1)
+
+
 
 # 여기부터 소스코드 ################################################################
 

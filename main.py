@@ -31,7 +31,6 @@ GPIO.setup(led, GPIO.OUT)
 
 
 
-pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 app = Flask(__name__)
 

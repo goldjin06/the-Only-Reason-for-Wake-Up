@@ -24,7 +24,6 @@ GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
 
-pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 limit_time = random.randrange(1, 4)
 

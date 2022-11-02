@@ -1,3 +1,4 @@
+import threading
 from flask import Flask, request, redirect
 from threading import Thread
 #import RPi as GPIO #디버깅 하려고 일단 주석처리
@@ -293,13 +294,12 @@ def delete(id):
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-
-
 def buzzer_cry():
+    is_stop_crying.set()
     buz.ringAlarm()
 
 def ringring_alarm(mission_type):
-    print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
+    print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
     #부저 작동 시작
 
     cry_forever.start()
@@ -309,18 +309,13 @@ def ringring_alarm(mission_type):
         pass
     elif mission_type == "사진매칭":
         card_mission.start()
-        cry_forever.join()
-
+        
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
-        pid = os.getpid()
-        print('pid : {0}'.format(pid))
-        os.kill(pid, 2)
-        # cry_forever.join()
         
     elif mission_type == "연산":
         calcul_mission.start()
-        cry_forever.join()
+
 
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
@@ -338,7 +333,9 @@ def time_checker():
                 pass
 
 alarm_timing = Thread(target= time_checker, args= ())
+
 cry_forever = Thread(target=buzzer_cry, args= ())
+is_stop_crying = threading.Event()
 
 if __name__ == '__main__':
     alarm_timing.start()

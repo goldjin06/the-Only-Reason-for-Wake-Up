@@ -115,13 +115,13 @@ def start():
         red = GPIO.input(button_red)
         yellow = GPIO.input(button_yellow)
         blue = GPIO.input(button_blue)
+        print(red, yellow, blue)
         if red and not yellow and not blue:
             answer = 1
         elif not red and yellow and not blue:
             answer = 2
         elif not red and not yellow and blue:
             answer = 3
-        print("*"+red, yellow, blue)
         if answerlist[int(answer)-1] == cal:
             print(answer)
             print('정답')

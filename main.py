@@ -213,7 +213,7 @@ def create():
                     <li><strong>반응 속도 테스트</strong> : 불이 들어오면 제한 시간보다 빠르게 버튼을 누릅니다.</li>
                     <li><strong>연산</strong> : 간단한 연산문제를 풉니다.</li>
                 </ol>
-                <input type="submit" value="저장">
+                <input type="submit" value="저장" style="background-color:blue;">
             </form>
         '''
         return template('', text,0)

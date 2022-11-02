@@ -40,7 +40,7 @@ disp.display()
 
 top = 10
 
-def disp_Q(cal_num1, cal_symbol, cal_num2, ans1, ans2, ans3):
+def disp_Q(cal_num1, cal_symbol, cal_num2, ans1, ans2, ans3): # OLED에 문제 출력
     global width, height, disp, top
 
     image = Image.new('1', (width, height))
@@ -57,7 +57,7 @@ def disp_Q(cal_num1, cal_symbol, cal_num2, ans1, ans2, ans3):
     disp.image(image)
     disp.display()
 
-def disp_res(result):
+def disp_res(result): # 결과 출력 (틀렸는지 맞았는지)
     global width, height, disp, top
 
     image = Image.new('1', (width, height))
@@ -71,13 +71,13 @@ def disp_res(result):
     disp.image(image)
     disp.display()
 
-def random_exclude(range_start, range_end, excludes):
+def random_exclude(range_start, range_end, excludes): # excludes를 제외한 range_start부터 range_end 까지의 랜덤숫자
     r = random.randint(range_start, range_end)
     if r in excludes:
         return random_exclude(range_start, range_end, excludes)
     return r
 
-def operator(number):
+def operator(number): # 랜덤정수를 연산자로 변환
     if number == 1:
         return('+')
     elif number == 2:
@@ -103,26 +103,27 @@ def start():
     elif c == 3:
         cal = num1 - num2
 
-    answer1 = random_exclude(cal-30, cal+30, [cal])
-    answer2 = random_exclude(cal-30, cal+30, [cal, answer1])
-    answerlist = [answer1, answer2, cal]
+    answer1 = random_exclude(cal-30, cal+30, [cal]) # 답을 제외한 랜덤숫자 (보기1)
+    answer2 = random_exclude(cal-30, cal+30, [cal, answer1]) # 답과 보기1을 제외한 랜덤숫자 (보기2)
+    answerlist = [answer1, answer2, cal] # 답, 보기1, 보기2를 배열에 담고 셔플
     random.shuffle(answerlist)
 
-    disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
+    disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2]) # 문제출력
     print(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
     while True:
         answer = 0
-        red = GPIO.input(button_red)
+        red = GPIO.input(button_red) # 버튼 입력
         yellow = GPIO.input(button_yellow)
         blue = GPIO.input(button_blue)
-        
+
         if red and not yellow and not blue:
             answer = 1
         elif not red and yellow and not blue:
             answer = 2
         elif not red and not yellow and blue:
             answer = 3
-        if answerlist[int(answer)-1] == cal:
+            
+        if answerlist[int(answer)-1] == cal: # 정답이 맞는지 확인
             print(answer)
             print('정답')
             disp_res('Correct')

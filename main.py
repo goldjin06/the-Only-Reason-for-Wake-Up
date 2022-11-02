@@ -299,7 +299,7 @@ def buzzer_cry():
     buz.ringAlarm()
 
 def ringring_alarm(mission_type):
-    print('컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
+    print('컴백이 아냐, 떠난 적 없으니까~') # 디버깅용
     #부저 작동 시작
 
     cry_forever.start()

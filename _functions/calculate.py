@@ -109,7 +109,7 @@ def start():
     random.shuffle(answerlist)
 
     disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
-
+    print(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
     while True:
         answer = 0
         red = GPIO.input(button_red)

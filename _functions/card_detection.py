@@ -18,7 +18,22 @@ width = disp.width
 height = disp.height
 top = 10
 
-def disp_mission_start(selected_picture):
+# cv2 세팅
+model = './dnn/bvlc_googlenet.caffemodel'
+config = './dnn/deploy.prototxt'
+classFile = './dnn/classification_classes_ILSVRC2012.txt'
+
+classNames = None
+with open(classFile, 'rt') as f:
+    classNames = f.read().rstrip('\n').split('\n')
+
+# Load a pre-trained neural network
+net = cv2.dnn.readNet(model, config)
+
+# 이미지 파일 읽기
+cap = cv2.VideoCapture(0)
+
+def disp_mission_start(selected_picture): # 카메라로 어떤 카드를 찍어야하는지 OLED에 출력
     global width, height, disp, top
 
     image = Image.new('1', (width, height))
@@ -31,7 +46,7 @@ def disp_mission_start(selected_picture):
     disp.image(image)
     disp.display()
     
-def mission_complete():
+def mission_complete(): # mission complete 출력
     global width, height, disp, top
 
     image = Image.new('1', (width, height))
@@ -44,7 +59,7 @@ def mission_complete():
     disp.image(image)
     disp.display()
 
-def detection(img):
+def detection(img): # 카메라 감지 함수
     blob = cv2.dnn.blobFromImage(img, scalefactor=1, size=(224, 224), mean=(104, 117, 123))
 
 # blob 이미지를 네트워크 입력으로 설정
@@ -73,32 +88,15 @@ def start():
     disp.clear()
     disp.display()
 
-    
-
-    # model, config, classFile 설정
-    model = './dnn/bvlc_googlenet.caffemodel'
-    config = './dnn/deploy.prototxt'
-    classFile = './dnn/classification_classes_ILSVRC2012.txt'
-
-    classNames = None
-    with open(classFile, 'rt') as f:
-        classNames = f.read().rstrip('\n').split('\n')
-
-    # Load a pre-trained neural network
-    net = cv2.dnn.readNet(model, config)
-
-    # 이미지 파일 읽기
-    cap = cv2.VideoCapture(0)
-
 
 ###### 여기부터 소스코드 #################################################################
 
     picture = ['teddy, teddy bear', 'banana', 'daisy']
-    random.shuffle(picture)
+    random.shuffle(picture) 
 
-    selected_picture = picture[0]
-    print("**detect {0}**".format(selected_picture))
-    disp_mission_start(selected_picture)
+    selected_picture = picture[0] # 랜덤으로 사진 이름이 들어있는 배열을 섞은 후 배열의 첫번째 이름을 들고오기
+    print("**detect {0}**".format(selected_picture)) # 의미없음 (디버깅용)
+    disp_mission_start(selected_picture) # OLED에 'detect (사진 이름)' 출력
 
     while True:
         if not cap.isOpened():
@@ -110,12 +108,13 @@ def start():
             break
 
         img = frame
-        # img = cv2.imread('bear.jpg')
-        a = detection(img)
-        print(a)
+        a = detection(img) # 이미지 감지
+        print(a) # 디버깅용
 
-        if a == selected_picture:
+        if a == selected_picture: # 사진 이름에 맞는 이미지가 감지되면 끝내기
             print('완료')
+            mission_complete()
+            time.sleep(2)
             break
 
         time.sleep(1)

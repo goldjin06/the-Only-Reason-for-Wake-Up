@@ -1,4 +1,5 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
+from operator import is_
 import RPi.GPIO as GPIO
 import time
 import random
@@ -99,6 +100,7 @@ def playSchoolring():
     melody('do', 4)
 
 def melody(name, beat):
+    
     pwm.start(5)
     if name == 'do':
         pwm.ChangeFrequency(262)
@@ -114,6 +116,7 @@ def melody(name, beat):
         pwm.ChangeFrequency(440)
     elif name == 'si':
         pwm.ChangeFrequency(494)
+
     time.sleep(beat * 0.3)
     pwm.stop()
 

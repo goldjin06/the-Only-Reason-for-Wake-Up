@@ -134,7 +134,7 @@ def template(content, text, isFuction, id=None):
         update_delete =f'''
             <li><a href = /create/>create</a></li>
             <li><a href="/update/{id}/">update</a></li>
-            <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete"></form></li>
+            <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete" style="background-color:blue; border:none; color:white;"></form></li>
         '''
     return f'''
     <!doctype html>
@@ -153,6 +153,9 @@ def template(content, text, isFuction, id=None):
                     margin: 5px;
                     weight: 50px;
                     display: inline-block;
+                }}
+                ul{{
+                    list-style-type: none;  
                 }}
             </style>
         <head>
@@ -214,7 +217,7 @@ def create():
                     <li><strong>반응 속도 테스트</strong> : 불이 들어오면 제한 시간보다 빠르게 버튼을 누릅니다.</li>
                     <li><strong>연산</strong> : 간단한 연산문제를 풉니다.</li>
                 </ol>
-                <input type="submit" value="저장">
+                <input type="submit" value="저장" style="background-color:blue; border:none; color:white;">
             </form>
         '''
         return template('', text,0)
@@ -254,7 +257,7 @@ def update(id):
                     <li><strong>반응 속도 테스트</strong> : 불이 들어오면 제한 시간보다 빠르게 버튼을 누릅니다.</li>
                     <li><strong>연산</strong> : 간단한 연산문제를 풉니다.</li>
                 </ol>
-                <input type="submit" value="저장">
+                <input type="submit" value="저장" style="background-color:blue; border:none; color:white;">
             </form>
         '''
         return template('', text,0)
@@ -299,16 +302,17 @@ def buzzer_cry():
     buz.ringAlarm()
 
 def ringring_alarm(mission_type):
-    print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #이곳에 gpio 코드 넣기
-    #부저 작동 시작
+    print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용
 
+    #부저 작동 시작
     cry_forever.start()
 
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
         pass
-    elif mission_type == "사진매칭":
+    elif mission_type == "사진 매칭":
         card_mission.start()
+        cry_forever.daemon()
         
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
@@ -334,7 +338,7 @@ def time_checker():
 
 alarm_timing = Thread(target= time_checker, args= ())
 
-cry_forever = Thread(target=buzzer_cry, args= ())
+cry_forever = Thread(target=buzzer_cry, args= (), daemon=True)
 is_stop_crying = threading.Event()
 
 if __name__ == '__main__':

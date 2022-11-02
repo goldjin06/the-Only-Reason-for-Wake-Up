@@ -22,6 +22,24 @@ GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
 GPIO.setwarnings(False)
+
+RST = 24
+
+#디스플레이 세팅
+#128x64 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# Initialize library.
+disp.begin()
+width = disp.width
+height = disp.height
+
+#Clear display.
+disp.clear()
+disp.display()
+
+top = 10
+
 def disp_Q(cal_num1, cal_symbol, cal_num2, ans1, ans2, ans3):
     global width, height, disp, top
 
@@ -69,22 +87,7 @@ def operator(number):
 
 def start():
     # Raspberry Pi pin configuration:
-    RST = 24
-
-    #디스플레이 세팅
-    #128x64 display with hardware I2C:
-    disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-    # Initialize library.
-    disp.begin()
-    width = disp.width
-    height = disp.height
-
-    #Clear display.
-    disp.clear()
-    disp.display()
-
-    top = 10
+    
 
     
     

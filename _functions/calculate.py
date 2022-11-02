@@ -121,8 +121,9 @@ def start():
             answer = 2
         elif not red and not yellow and blue:
             answer = 3
-        
+        print("*"+red, yellow, blue)
         if answerlist[int(answer)-1] == cal:
+            print(answer)
             print('정답')
             disp_res('Correct')
             break

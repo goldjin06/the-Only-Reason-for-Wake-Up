@@ -122,17 +122,20 @@ def start():
             answer = 2
         elif not red and not yellow and blue:
             answer = 3
-            
+
         if answerlist[int(answer)-1] == cal: # 정답이 맞는지 확인
             print(answer)
             print('정답')
             disp_res('Correct')
+            time.sleep(2)
             break
         elif answer != 0:
             print('오답')
             disp_res('wrong')
             time.sleep(2)
             disp_Q(num1, operator(c), num2, answerlist[0], answerlist[1], answerlist[2])
+    
+    disp.clear()
 
 
 

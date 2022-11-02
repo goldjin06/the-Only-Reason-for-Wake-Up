@@ -153,6 +153,9 @@ def template(content, text, isFuction, id=None):
                     weight: 50px;
                     display: inline-block;
                 }}
+                ul{{
+                    list-style-type: none;  
+                }}
             </style>
         <head>
         <body>

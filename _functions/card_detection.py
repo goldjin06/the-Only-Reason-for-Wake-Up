@@ -54,7 +54,7 @@ def mission_complete(): # mission complete 출력
 
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
     draw.text((10, top), 'MISSION', font=font, fill=255)
-    draw.text((30, top + 20), 'COMPLETE', font=font, fill=255)
+    draw.text((5, top + 20), 'COMPLETE', font=font, fill=255)
 
     disp.image(image)
     disp.display()

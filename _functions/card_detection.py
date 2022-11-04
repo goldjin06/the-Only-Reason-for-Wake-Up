@@ -115,6 +115,7 @@ def start():
             print('완료')
             mission_complete()
             time.sleep(2)
+            disp.clear()
             break
 
         time.sleep(1)

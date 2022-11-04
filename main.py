@@ -306,7 +306,16 @@ def ringring_alarm(mission_type):
 
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
-        pass
+        a = random.randint(1,3)
+        if a == 1:
+            card_mission.start()
+            cry_forever.kill()
+        elif a == 2:
+            reaction_mission.start()
+            cry_forever.kill()
+        elif a == 3:
+            calcul_mission.start()
+            cry_forever.kill()
     
     elif mission_type == "사진 매칭":
         card_mission.start()

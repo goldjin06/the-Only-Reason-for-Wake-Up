@@ -40,16 +40,17 @@ GPIO.setup(led, GPIO.OUT)
 
 app = Flask(__name__)
 
+### data ##############################################################################
+
 alarms = [
         {'id': 1, 'hour': 6, 'minute': 30, 'missionType' : '랜덤'},
         {'id': 2, 'hour': 16, 'minute': 38, 'missionType' : '사진 매칭'}
         ]
 nextId = 3
 
+### fuctions (flask) ##################################################################
 
-#data
-
-#hour select options -> 알람 설정할때 뜨는 '시간' 옵션들(1시부터 24시)
+# hour select options -> 알람 설정할때 뜨는 '시간' 옵션들(1시부터 24시)
 def hour_select_options(selected=None):
     
     value_ = ''
@@ -65,7 +66,7 @@ def hour_select_options(selected=None):
         </select>
     '''
 
-#minute select options -> 알람설정할 때 뜨는 '분' 옵션들(00분부터 59분)
+# minute select options -> 알람설정할 때 뜨는 '분' 옵션들(00분부터 59분)
 def minute_select_options(selected=None):
     
     value_ = ''
@@ -97,7 +98,7 @@ def misson_select_options(selected=None):
         </select>
     ''')
 
-#미션 숫자 (1,2,3,4)를 문자로 바꾸는 함수
+# 미션 숫자 (1,2,3,4)를 문자로 바꾸는 함수
 def missionType(typeNum):
     if typeNum == 1:
         return '랜덤'
@@ -108,6 +109,7 @@ def missionType(typeNum):
     elif typeNum == 4:
         return '연산'
 
+# missionType 함수의 reverse
 def r_missionType(mission):
     if mission == '랜덤':
         return 1
@@ -186,12 +188,13 @@ def getContents():
         '''
     return(content)
 
-#!!!여기서 오류나면 dictionary 자료형 살펴보기!!! 오류 안나면 이 주석 지워줘
-@app.route('/')
+### routing ###############################################################################################
+
+@app.route('/') # 메인 페이지
 def index():
     return template(getContents(),'',1)
 
-@app.route('/alarm/<int:id>/')
+@app.route('/alarm/<int:id>/') # 설정된 알람 페이지
 def checkalarm(id):
     text = ''
     for alarm in alarms:
@@ -202,7 +205,7 @@ def checkalarm(id):
     return template(getContents(), text,2, int(id))
     
 
-@app.route('/create/', methods=['GET', 'POST']) 
+@app.route('/create/', methods=['GET', 'POST']) # 알람 생성 페이지
 def create():
     global nextId
     if request.method == 'GET':
@@ -234,7 +237,7 @@ def create():
             <br>
             <a href="/">홈으로 돌아가기</a>
         '''
-@app.route('/update/<int:id>/',methods=['GET','POST'])
+@app.route('/update/<int:id>/',methods=['GET','POST']) # 알람 업데이트 페이지
 def update(id):
     if request.method == 'GET':
         hour = 0
@@ -287,7 +290,7 @@ def update(id):
             <a href="/">홈으로 돌아가기</a>
         '''
 
-@app.route('/delete/<int:id>/', methods=['POST'])
+@app.route('/delete/<int:id>/', methods=['POST']) # 알람 삭제
 def delete(id):
     for alarm in alarms:
         if id == alarm['id']:
@@ -296,15 +299,15 @@ def delete(id):
 
     return redirect('/')
 
-#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+### functions (Alarm) #######################################################################################
 
-def ringring_alarm(mission_type):
-    print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용
+def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함수
+    print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용 프린트
 
     #부저 작동 시작
     cry_forever.start()
 
-    #미션 실행 설계(임시)
+    #미션 실행
     if mission_type== "랜덤":
         a = random.randint(1,3)
         if a == 1:
@@ -333,7 +336,7 @@ def ringring_alarm(mission_type):
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
-def time_checker():
+def time_checker(): # 시간을 재고 지금 시간과 맞는지 확인해주는 함수
     while True:
         now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
         time.sleep(3)
@@ -345,11 +348,13 @@ def time_checker():
             else:
                 pass
 
-alarm_timing = Thread(target= time_checker, args= ())
 
-cry_forever = Process(target=buz.ringAlarm, args= ())
+### code #################################################################################################
+
+alarm_timing = Thread(target= time_checker, args= ()) # 시간 재는 스레드
+cry_forever = Process(target=buz.ringAlarm, args= ()) # 알람 울리는 프로세스
 
 if __name__ == '__main__':
-    alarm_timing.start()
+    alarm_timing.start() 
     app.run(host='0.0.0.0', threaded= True)
     

@@ -1,4 +1,4 @@
-# 이 소스 복사해서 나중에 붙여넣을예정
+# 알람 울리는 코드
 from operator import is_
 import RPi.GPIO as GPIO
 import time
@@ -28,9 +28,8 @@ pwm = GPIO.PWM(piezzo_buzzer, 1)
 
 
 
-# 여기부터 소스코드 ################################################################
 
-def playAirplane():
+def playAirplane(): # 비행기를 재생하는 함수
     beat = 0.3
     melody('mi', 1.5)
     melody('re', 0.5)
@@ -64,7 +63,7 @@ def playAirplane():
     melody('do', 1)
     time.sleep(beat * 3)
     
-def playSchoolring():
+def playSchoolring(): # 학교종이 땡땡땡을 재생하는 함수
     beat = 0.3
     melody('sol', 1)
     time.sleep(0.01)
@@ -99,7 +98,7 @@ def playSchoolring():
     melody('mi', 1)
     melody('do', 4)
 
-def melody(name, beat):
+def melody(name, beat): # 계이름과 박자를 입력하면 음을 재생하는 함수
     
     pwm.start(5)
     if name == 'do':
@@ -120,7 +119,7 @@ def melody(name, beat):
     time.sleep(beat * 0.3)
     pwm.stop()
 
-def ringAlarm():
+def ringAlarm(): # 랜덤값 받아서 랜덤으로 알람 재생하는 함수
     # evt = 
     a = random.randint(1, 2)
     print(a)

@@ -151,7 +151,7 @@ def do_mission_untill_clear():
     #미션 성공, 실패 여부 리턴
     return is_not_complete
 
-def start(is_clear):
+def start():
     global limit_time
 
     #Clear display.

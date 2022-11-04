@@ -302,16 +302,16 @@ def ringring_alarm(mission_type):
     print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용
 
     #부저 작동 시작
+    cry_forever = Process(target=buz.ringAlarm, args= ())
     cry_forever.start()
-
+    
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
         pass
-    
+
     elif mission_type == "사진 매칭":
         card_mission.start()
         cry_forever.kill()
-
         
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
@@ -320,7 +320,7 @@ def ringring_alarm(mission_type):
     elif mission_type == "연산":
         calcul_mission.start()
         cry_forever.kill()
-
+        
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
@@ -337,8 +337,6 @@ def time_checker():
                 pass
 
 alarm_timing = Thread(target= time_checker, args= ())
-
-cry_forever = Process(target=buz.ringAlarm, args= ())
 
 if __name__ == '__main__':
     alarm_timing.start()

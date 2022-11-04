@@ -1,3 +1,4 @@
+from operator import is_
 import threading
 from flask import Flask, request, redirect
 from threading import Thread
@@ -14,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 import _functions.calculate as calcul_mission
 import _functions.card_detection as card_mission
 import _functions.reaction_speed_test as reaction_mission
-import os
+from multiprocessing import Process
 
 GPIO.setwarnings(False)
 
@@ -297,10 +298,6 @@ def delete(id):
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-def buzzer_cry():
-    is_stop_crying.set()
-    buz.ringAlarm()
-
 def ringring_alarm(mission_type):
     print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용
 
@@ -310,16 +307,19 @@ def ringring_alarm(mission_type):
     #미션 실행 설계(임시)
     if mission_type== "랜덤":
         pass
+    
     elif mission_type == "사진 매칭":
         card_mission.start()
-        cry_forever.daemon()
+        cry_forever.kill()
+
         
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
+        cry_forever.kill()
         
     elif mission_type == "연산":
         calcul_mission.start()
-
+        cry_forever.kill()
 
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
@@ -338,8 +338,7 @@ def time_checker():
 
 alarm_timing = Thread(target= time_checker, args= ())
 
-cry_forever = Thread(target=buzzer_cry, args= (), daemon=True)
-is_stop_crying = threading.Event()
+cry_forever = Process(target=buz.ringAlarm, args= ())
 
 if __name__ == '__main__':
     alarm_timing.start()

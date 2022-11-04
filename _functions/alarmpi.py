@@ -121,12 +121,14 @@ def melody(name, beat):
     pwm.stop()
 
 def ringAlarm():
+    # evt = 
     a = random.randint(1, 2)
     print(a)
 
     if a == 1:
         while True:
             playSchoolring()
+            
     else:
         while True:
             playAirplane()

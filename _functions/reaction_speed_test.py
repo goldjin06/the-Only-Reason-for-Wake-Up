@@ -1,4 +1,5 @@
 # 이 소스 복사해서 나중에 붙여넣을예정
+from xml.etree.ElementInclude import LimitedRecursiveIncludeError
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO
@@ -150,15 +151,13 @@ def do_mission_untill_clear():
     #미션 성공, 실패 여부 리턴
     return is_not_complete
 
-def start():
-    
+def start(is_clear):
+    global limit_time
 
     #Clear display.
     disp.clear()
     disp.display()
 
-    
-    
     disp_title()
     time.sleep(3) # 3초만 쉬었다 갑시다~
 
@@ -195,6 +194,7 @@ def start():
     time.sleep(4)
     disp.clear()
     disp.display()
+    
     return 0
 
 

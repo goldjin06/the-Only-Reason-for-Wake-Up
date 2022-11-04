@@ -305,7 +305,15 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
     print('제니 : 컴백이 아냐, 떠난 적 없으니까~') #디버깅용 프린트
 
     #부저 작동 시작
+    cry_forever = Process(target=buz.ringAlarm, args= ())
     cry_forever.start()
+<<<<<<< HEAD
+    
+    #미션 실행 설계(임시)
+    if mission_type== "랜덤":
+        pass
+
+=======
 
     #미션 실행
     if mission_type== "랜덤":
@@ -320,10 +328,10 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
             calcul_mission.start()
             cry_forever.kill()
     
+>>>>>>> 9516ea9578a24ca489ebd94cc1c9d5f044079975
     elif mission_type == "사진 매칭":
         card_mission.start()
         cry_forever.kill()
-
         
     elif mission_type == "반응속도테스트":
         reaction_mission.start()
@@ -332,7 +340,7 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
     elif mission_type == "연산":
         calcul_mission.start()
         cry_forever.kill()
-
+        
     now_sec = time.strftime('%S', time.localtime(time.time()))
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
@@ -349,11 +357,14 @@ def time_checker(): # 시간을 재고 지금 시간과 맞는지 확인해주�
                 pass
 
 
+<<<<<<< HEAD
+=======
 ### code #################################################################################################
 
 alarm_timing = Thread(target= time_checker, args= ()) # 시간 재는 스레드
 cry_forever = Process(target=buz.ringAlarm, args= ()) # 알람 울리는 프로세스
 
+>>>>>>> 9516ea9578a24ca489ebd94cc1c9d5f044079975
 if __name__ == '__main__':
     alarm_timing.start() 
     app.run(host='0.0.0.0', threaded= True)

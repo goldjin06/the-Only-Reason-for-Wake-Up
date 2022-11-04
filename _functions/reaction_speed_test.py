@@ -60,7 +60,7 @@ def disp_title():
     disp.image(image)
     disp.display()
 
-#동치
+#동치 - 위의 함수 형태와 동일하다
 def display_times(left_time):
     global width, height, disp, limit_time, top
 
@@ -68,7 +68,10 @@ def display_times(left_time):
     draw = ImageDraw.Draw(image)
 
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 15)
+    #led가 들어왔을때 limit time 안으로 버튼을 눌러야 미션을 클리어 할수 있다!
     draw.text((10, top), 'limit time: {0}'.format(limit_time), font=font, fill=255)
+
+    # []초뒤 시작한다
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 13)
     draw.text((30, top + 20), 'start in', font=font, fill=255)
     draw.text((30, top + 30), '{0} second'.format(left_time), font=font, fill=255)
@@ -82,7 +85,8 @@ def disp_mission_start():
 
     image = Image.new('1', (width, height))
     draw = ImageDraw.Draw(image)
-
+    
+    #미션 시작하는 것을 디스플레이로 보여줌
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
     draw.text((10, top), 'Mission', font=font, fill=255)
     draw.text((30, top + 20), 'Start', font=font, fill=255)
@@ -99,6 +103,7 @@ def disp_mission_result(result):
 
     font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 25)
     
+    #result 값을 받아 성공, 실패 여부를 디스플레이로 보여준다
     draw.text((10, top), 'Mission', font=font, fill=255)
     draw.text((30, top + 20), '{0}'.format(result), font=font, fill=255)
 

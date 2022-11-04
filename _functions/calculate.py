@@ -22,6 +22,26 @@ GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 
 GPIO.setwarnings(False)
+
+ # Raspberry Pi pin configuration:
+RST = 24
+
+#디스플레이 세팅
+#128x64 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# Initialize library.
+disp.begin()
+
+#Clear display.
+disp.clear()
+disp.display()
+
+top = 10
+    
+width = disp.width
+height = disp.height
+
 def disp_Q(cal_num1, cal_symbol, cal_num2, ans1, ans2, ans3):
 
     image = Image.new('1', (width, height))
@@ -52,6 +72,10 @@ def disp_res(result):
     disp.image(image)
     disp.display()
 
+    time.sleep(3)
+    disp.clear()
+    disp.display()
+
 def random_exclude(range_start, range_end, excludes):
     r = random.randint(range_start, range_end)
     if r in excludes:
@@ -67,24 +91,6 @@ def operator(number):
         return('-')
 
 def start():
-    # Raspberry Pi pin configuration:
-    RST = 24
-
-    #디스플레이 세팅
-    #128x64 display with hardware I2C:
-    disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-    # Initialize library.
-    disp.begin()
-    width = disp.width
-    height = disp.height
-
-    #Clear display.
-    disp.clear()
-    disp.display()
-
-    top = 10
-    
     num1 = random.randint(1, 20) # 정수 하나 랜덤
     num2 = random.randint(1, 20) # 정수 하나 랜덤
     c = random.randint(1, 3) # 연산자 랜덤2

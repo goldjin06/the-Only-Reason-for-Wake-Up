@@ -310,8 +310,9 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
 
     #미션 실행
     if mission_type== "랜덤":
+        #1~3 랜덤 정수를 받아 숫자에 따라 실행하는 미션이 달라진다.
         a = random.randint(1,3)
-        if a == 1:
+        if a == 1:  # 1이면 카드 감지 미션
             card_mission.start()
             cry_forever.kill()
         elif a == 2:
@@ -337,12 +338,19 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
     time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
 
 def time_checker(): # 시간을 재고 지금 시간과 맞는지 확인해주는 함수
+
+    #무한으로 즐겨요~ 
     while True:
+        #현제 시간 체크하기
         now_time = time.strftime('%H시 %M분', time.localtime(time.time()))
         time.sleep(3)
+
         for alarm in alarms:
+            #만약 저장된 알람시각과 현제 시간이 같을 경우 알람을 울리게 한다.
             if f'{alarm["hour"]}시 {alarm["minute"]}분' == now_time:
                 ringring_alarm(alarm["missionType"])
+
+                #시계가 정확한지 확인
                 print(now_time)
                 print(f'{alarm["hour"]}시 {alarm["minute"]}분')
             else:

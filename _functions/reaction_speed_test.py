@@ -143,8 +143,10 @@ def do_mission_untill_clear():
         #현재 시간 기록
         ing_time = time.time()
 
+        #디버깅용
         print('times : ', limit_time, ing_time - start_time)
         print('values : ', val_B, val_R, val_Y)
+
         #만약 제한시간이 지나면 무한반복문 빠져나오기
         if ing_time - start_time >= limit_time: 
             break

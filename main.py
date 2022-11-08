@@ -163,7 +163,7 @@ def template(content, text, isFuction, id=None):
             </style>
         <head>
         <body>
-            <a href="/" id="title"><strong style="font-size:50px;">일어나야만 하는<br>이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
+            <a href="/" id="title"><strong style="font-size:50px;">일어나야만 하는 이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
             <ol>
                 {content}
             </ol>
@@ -313,17 +313,18 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
         #1~3 랜덤 정수를 받아 숫자에 따라 실행하는 미션이 달라진다.
         a = random.randint(1,3)
         if a == 1:  # 1이면 카드 감지 미션
-            card_mission.start()
-            cry_forever.kill()
-        elif a == 2:
+            card_mission.start() #미션 끝날때까지 계속됨
+            cry_forever.kill()  # 미션이 끝나면 멀티 프로세싱 죽이기
+        elif a == 2: # 2면 반응속도
             reaction_mission.start()
             cry_forever.kill()
-        elif a == 3:
+        elif a == 3: # 3이면 연산 미션
             calcul_mission.start()
             cry_forever.kill()
-    
+
+    #위와 동일
     elif mission_type == "사진 매칭":
-        card_mission.start()
+        card_mission.start() 
         cry_forever.kill()
         
     elif mission_type == "반응속도테스트":
@@ -335,7 +336,7 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
         cry_forever.kill()
         
     now_sec = time.strftime('%S', time.localtime(time.time()))
-    time.sleep(60 - int(now_sec)) # 60 - int(now_sec) 만큼 쉬기
+    time.sleep(60 - int(now_sec)) # 잠시  만큼 쉬기
 
 def time_checker(): # 시간을 재고 지금 시간과 맞는지 확인해주는 함수
 

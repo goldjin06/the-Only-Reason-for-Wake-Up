@@ -119,7 +119,6 @@ def melody(name, beat): # 계이름과 박자를 입력하면 음을 재생하�
     pwm.stop()
 
 def ringAlarm(): # 랜덤값 받아서 랜덤으로 알람 재생하는 함수
-    # evt = 
     a = random.randint(1, 2)
     print(a)
 

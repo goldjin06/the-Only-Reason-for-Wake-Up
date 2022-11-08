@@ -95,6 +95,7 @@ def start():
     num2 = random.randint(1, 20) # 정수 하나 랜덤
     c = random.randint(1, 3) # 연산자 랜덤2
     
+    # 계산결과 저장
     if c == 1:
         cal = num1 + num2 # cal -> 계산결과
     elif c == 2: 

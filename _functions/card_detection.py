@@ -115,6 +115,7 @@ def start():
             mission_complete()
             time.sleep(2)
             disp.clear()
+            disp.display()
             break
 
         time.sleep(1)

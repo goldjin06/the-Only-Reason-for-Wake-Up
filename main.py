@@ -163,7 +163,7 @@ def template(content, text, isFuction, id=None):
             </style>
         <head>
         <body>
-            <a href="/" id="title"><strong style="font-size:50px;">일어나야만 하는<br>      이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
+            <a href="/" id="title"><strong style="font-size:50px;">일어나야만 하는<br>이</strong>기혁<strong style="font-size:50px;">유</strong>금진</a>
             <ol>
                 {content}
             </ol>

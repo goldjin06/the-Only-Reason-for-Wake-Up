@@ -340,7 +340,7 @@ def ringring_alarm(mission_type): # 알람 울리고 미션을 실행하는 함�
 
 def time_checker(): # 시간을 재고 지금 시간과 맞는지 확인해주는 함수
 
-    #무한으로 즐겨요~ 
+    #무한으로 즐겨요~ (?)
     while True:
         #현제 시간 체크하기
         now_time = time.strftime('%H시 %M분', time.localtime(time.time()))

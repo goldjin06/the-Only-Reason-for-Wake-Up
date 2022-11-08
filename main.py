@@ -231,6 +231,7 @@ def create():
         mission = request.form['mission']
         newAlarm =  {'id': nextId, 'hour': hour, 'minute': minute, 'missionType' : mission}
         alarms.append(newAlarm)
+        nextId = nextId+ 1
         print(alarms)
         return f'''
             <p>{hour}시 {minute}분에 울리는 알람을 저장하였습니다</p>

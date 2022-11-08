@@ -131,4 +131,3 @@ def ringAlarm(): # 랜덤값 받아서 랜덤으로 알람 재생하는 함수
     else:
         while True:
             playAirplane()
-

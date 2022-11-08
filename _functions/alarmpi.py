@@ -1,5 +1,4 @@
-# 알람 울리는 코드
-from operator import is_
+
 import RPi.GPIO as GPIO
 import time
 import random

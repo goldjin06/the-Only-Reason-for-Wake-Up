@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import time
 import random
-from operator import is_not
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import RPi.GPIO as GPIO

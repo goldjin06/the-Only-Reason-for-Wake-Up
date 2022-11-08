@@ -6,12 +6,15 @@ import RPi.GPIO as GPIO
 import time
 import random   
 
+# 버튼 선언
 BUTTON_RED = 9
 BUTTON_YELLOW =  10
 BUTTON_BLUE = 11
 
+#얘는 여기서 필요없음
 piezzo_buzzer = 15
 
+#led 선언
 led = 21
 
 GPIO.setwarnings(False)
@@ -23,8 +26,6 @@ GPIO.setup(BUTTON_YELLOW, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(BUTTON_BLUE, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(piezzo_buzzer, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
-
-global limit_time, width, height, top
     
 limit_time = random.randrange(1, 4)
 

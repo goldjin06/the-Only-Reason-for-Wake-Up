@@ -156,6 +156,7 @@ def do_mission_untill_clear():
     #미션 성공, 실패 여부 리턴
     return is_not_complete
 
+# 메인 함수에서 끌어가는 함수 
 def start():
     global limit_time
 
@@ -169,6 +170,7 @@ def start():
     #미션 제한시간을 유저에게 알려줌 and 5초 카운트 이후 미션 시작
     wait_mission_and_start()
 
+    #얘는 디스플레이로 '미션 시작!'을 보여줍니다
     disp_mission_start()
 
     #미션을 실패할때까지 미션 실행 함수를 돌린다. 성공, 실패 여부를 함수에서 리턴받음
@@ -187,6 +189,7 @@ def start():
             print("mission failed")
             time.sleep(2)
 
+            # 제한시간 재설정 이후 미션 재시작
             limit_time = random.randrange(1, 4)
             print("Restart!")
             wait_mission_and_start()

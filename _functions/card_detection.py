@@ -124,5 +124,4 @@ def start():
     # blob 이미지 생성
     disp.clear()
     
-cap.release()
-cv2.destroyAllWindows()
+    

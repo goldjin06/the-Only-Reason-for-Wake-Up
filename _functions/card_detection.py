@@ -18,9 +18,9 @@ height = disp.height
 top = 10
 
 # cv2 세팅
-# model = './dnn/bvlc_googlenet.caffemodel'
-# config = './dnn/deploy.prototxt'
-# classFile = './dnn/classification_classes_ILSVRC2012.txt'
+model = './dnn/bvlc_googlenet.caffemodel'
+config = './dnn/deploy.prototxt'
+classFile = './dnn/classification_classes_ILSVRC2012.txt'
 
 classNames = None
 with open(classFile, 'rt') as f:
@@ -124,13 +124,5 @@ def start():
     # blob 이미지 생성
     disp.clear()
     
-
-
-if __name__ == "__main__":
-    model = '../dnn/bvlc_googlenet.caffemodel'
-    config = '../dnn/deploy.prototxt'
-    classFile = '../dnn/classification_classes_ILSVRC2012.txt'
-    start()
-
 cap.release()
 cv2.destroyAllWindows()

@@ -124,5 +124,10 @@ def start():
     # blob 이미지 생성
     disp.clear()
     
+
+
+if __name__ == "__main__":
+    start()
+    
 cap.release()
 cv2.destroyAllWindows()

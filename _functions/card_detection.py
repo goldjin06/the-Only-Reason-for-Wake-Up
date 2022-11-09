@@ -113,7 +113,8 @@ def start():
         if a == selected_picture: # 사진 이름에 맞는 이미지가 감지되면 끝내기
             print('완료')
             mission_complete()
-            time.sleep(2)
+            
+            time.sleep(5)
             disp.clear()
             disp.display()
             break

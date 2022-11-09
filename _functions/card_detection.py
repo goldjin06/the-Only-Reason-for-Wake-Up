@@ -127,7 +127,10 @@ def start():
 
 
 if __name__ == "__main__":
+    model = '../dnn/bvlc_googlenet.caffemodel'
+    config = '../dnn/deploy.prototxt'
+    classFile = '../dnn/classification_classes_ILSVRC2012.txt'
     start()
-    
+
 cap.release()
 cv2.destroyAllWindows()

@@ -123,5 +123,10 @@ def start():
 
     # blob 이미지 생성
     disp.clear()
+<<<<<<< HEAD
     
     
+=======
+cap.release()
+cv2.destroyAllWindows()
+>>>>>>> parent of 9e7a4be (change)

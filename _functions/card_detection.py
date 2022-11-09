@@ -116,7 +116,6 @@ def start():
             time.sleep(5)
             disp.clear()
             disp.display()
-
             
             cap.release()
             cv2.destroyAllWindows()
@@ -126,5 +125,3 @@ def start():
 
     # blob 이미지 생성
     disp.clear()
-    
-

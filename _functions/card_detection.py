@@ -29,9 +29,6 @@ with open(classFile, 'rt') as f:
 # Load a pre-trained neural network
 net = cv2.dnn.readNet(model, config)
 
-# 이미지 파일 읽기
-cap = cv2.VideoCapture(0)
-
 def disp_mission_start(selected_picture): # 카메라로 어떤 카드를 찍어야하는지 OLED에 출력
     global width, height, disp, top
 
@@ -81,7 +78,9 @@ def detection(img): # 카메라 감지 함수
     return classNames[classId]
 
 def start():
-    
+
+    # 이미지 파일 읽기
+    cap = cv2.VideoCapture(0)
 
     #Clear display.
     disp.clear()
@@ -113,10 +112,14 @@ def start():
         if a == selected_picture: # 사진 이름에 맞는 이미지가 감지되면 끝내기
             print('완료')
             mission_complete()
-            
+
             time.sleep(5)
             disp.clear()
             disp.display()
+
+            
+            cap.release()
+            cv2.destroyAllWindows()
             break
 
         time.sleep(1)
@@ -124,5 +127,4 @@ def start():
     # blob 이미지 생성
     disp.clear()
     
-cap.release()
-cv2.destroyAllWindows()
+
